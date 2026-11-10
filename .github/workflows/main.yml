@@ -37,6 +37,16 @@ jobs:
         with:
             submodules: recursive
 
+      - name: Cache dependencies
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/Library/Caches/Homebrew
+            theos
+          key: ${{ runner.os }}-deps-${{ hashFiles('.github/workflows/main.yml') }}
+          restore-keys: |
+            ${{ runner.os }}-deps-
+
       - name: Install Procursus
         uses: dhinakg/procursus-action@main
         with:
